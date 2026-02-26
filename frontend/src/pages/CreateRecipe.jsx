@@ -56,13 +56,13 @@ function CreateRecipe() {
 
   return (
     <section className="mx-auto max-w-5xl space-y-5">
-      <div className="page-shell rounded-2xl p-6 md:p-7">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-700">
+      <div className="page-shell rounded-3xl p-6 md:p-7">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">
           Recipe Studio
         </p>
         <h1 className="section-title mt-1 text-3xl font-extrabold">Create Recipe</h1>
         <p className="subtle-text mt-2 text-sm">
-          Fill all required details and submit.
+          Build a complete recipe card with image, prep details, and exact steps.
         </p>
       </div>
 

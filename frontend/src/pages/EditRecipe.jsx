@@ -87,13 +87,13 @@ function EditRecipe() {
 
   return (
     <section className="mx-auto max-w-5xl space-y-5">
-      <div className="page-shell rounded-2xl p-6 md:p-7">
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cyan-700">
+      <div className="page-shell rounded-3xl p-6 md:p-7">
+        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal-700">
           Recipe Studio
         </p>
         <h1 className="section-title mt-1 text-3xl font-extrabold">Edit Recipe</h1>
         <p className="subtle-text mt-2 text-sm">
-          Update fields and save changes.
+          Refine your recipe and keep your collection polished.
         </p>
       </div>
 

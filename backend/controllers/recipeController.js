@@ -25,7 +25,7 @@ const normalizePayload = (payload) => {
   return normalized;
 };
 
-const buildFilters = ({ search, cuisine, difficulty, vegetarian }) => {
+const buildFilters = ({ search, cuisine, difficulty, vegetarian, maxTime }) => {
   const filters = {};
 
   if (search) {
@@ -52,13 +52,38 @@ const buildFilters = ({ search, cuisine, difficulty, vegetarian }) => {
     filters.vegetarian = false;
   }
 
+  if (maxTime) {
+    const parsedMaxTime = Number(maxTime);
+    if (!Number.isNaN(parsedMaxTime) && parsedMaxTime > 0) {
+      filters.time = { $lte: parsedMaxTime };
+    }
+  }
+
   return filters;
+};
+
+const buildSort = (sortBy) => {
+  switch (sortBy) {
+    case "oldest":
+      return { createdAt: 1 };
+    case "title_asc":
+      return { title: 1 };
+    case "title_desc":
+      return { title: -1 };
+    case "time_asc":
+      return { time: 1 };
+    case "time_desc":
+      return { time: -1 };
+    default:
+      return { createdAt: -1 };
+  }
 };
 
 const getRecipes = async (req, res, next) => {
   try {
     const filters = buildFilters(req.query);
-    const recipes = await Recipe.find(filters).sort({ createdAt: -1 });
+    const sort = buildSort(req.query.sortBy);
+    const recipes = await Recipe.find(filters).sort(sort);
     res.status(200).json(recipes);
   } catch (error) {
     next(error);

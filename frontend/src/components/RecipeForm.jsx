@@ -1,16 +1,30 @@
 const difficultyOptions = ['Easy', 'Medium', 'Hard']
 
 function RecipeForm({ formData, onChange, onSubmit, submitLabel, isSubmitting }) {
+  const ingredientCount = formData.ingredients
+    .split('\n')
+    .map((item) => item.trim())
+    .filter(Boolean).length
+
   return (
-    <form
-      onSubmit={onSubmit}
-      className="page-shell space-y-6 rounded-2xl p-5 md:p-8"
-    >
-      <div className="rounded-xl border border-cyan-100 bg-gradient-to-r from-cyan-50 to-teal-50 p-4">
-        <h2 className="text-lg font-bold text-slate-900">Recipe Details</h2>
-        <p className="mt-1 text-sm text-slate-600">
-          Add clear details so anyone can cook this recipe confidently.
-        </p>
+    <form onSubmit={onSubmit} className="page-shell space-y-6 rounded-3xl p-5 md:p-8">
+      <div className="grid gap-4 lg:grid-cols-[1.4fr_1fr]">
+        <div className="rounded-2xl border border-teal-100 bg-gradient-to-r from-teal-50 to-orange-50 p-4">
+          <h2 className="text-lg font-bold text-slate-900">Recipe Details</h2>
+          <p className="mt-1 text-sm text-slate-600">
+            Add clean steps, exact ingredients, and metadata for better discovery.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-slate-200 bg-white p-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-500">
+            Quality Meter
+          </p>
+          <div className="mt-2 flex items-end gap-2">
+            <p className="text-2xl font-bold text-slate-900">{ingredientCount}</p>
+            <p className="pb-1 text-sm text-slate-600">ingredients added</p>
+          </div>
+        </div>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2">
@@ -43,9 +57,7 @@ function RecipeForm({ formData, onChange, onSubmit, submitLabel, isSubmitting })
 
       <div className="grid gap-4 md:grid-cols-3">
         <label className="form-control w-full">
-          <span className="label-text mb-1 font-semibold text-slate-700">
-            Time (minutes)
-          </span>
+          <span className="label-text mb-1 font-semibold text-slate-700">Time (minutes)</span>
           <input
             required
             min="1"
@@ -58,9 +70,7 @@ function RecipeForm({ formData, onChange, onSubmit, submitLabel, isSubmitting })
         </label>
 
         <label className="form-control w-full">
-          <span className="label-text mb-1 font-semibold text-slate-700">
-            Difficulty
-          </span>
+          <span className="label-text mb-1 font-semibold text-slate-700">Difficulty</span>
           <select
             required
             name="difficulty"
@@ -106,9 +116,7 @@ function RecipeForm({ formData, onChange, onSubmit, submitLabel, isSubmitting })
       </label>
 
       <label className="form-control w-full">
-        <span className="label-text mb-1 font-semibold text-slate-700">
-          Instructions
-        </span>
+        <span className="label-text mb-1 font-semibold text-slate-700">Instructions</span>
         <textarea
           required
           name="instructions"
@@ -122,9 +130,7 @@ function RecipeForm({ formData, onChange, onSubmit, submitLabel, isSubmitting })
 
       <div className="grid gap-4 md:grid-cols-2">
         <label className="form-control w-full">
-          <span className="label-text mb-1 font-semibold text-slate-700">
-            Cover Image URL
-          </span>
+          <span className="label-text mb-1 font-semibold text-slate-700">Cover Image URL</span>
           <input
             name="coverImage"
             value={formData.coverImage}
@@ -135,7 +141,7 @@ function RecipeForm({ formData, onChange, onSubmit, submitLabel, isSubmitting })
           />
         </label>
 
-        <label className="label mt-7 cursor-pointer justify-start gap-3 rounded-xl border border-slate-300 bg-white p-3">
+        <label className="label mt-0 cursor-pointer justify-start gap-3 rounded-2xl border border-slate-300 bg-white p-3 md:mt-7">
           <input
             name="vegetarian"
             checked={formData.vegetarian}
@@ -147,9 +153,22 @@ function RecipeForm({ formData, onChange, onSubmit, submitLabel, isSubmitting })
         </label>
       </div>
 
+      {formData.coverImage ? (
+        <div className="overflow-hidden rounded-2xl border border-slate-200">
+          <img
+            src={formData.coverImage}
+            alt="Recipe preview"
+            className="h-44 w-full object-cover"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none'
+            }}
+          />
+        </div>
+      ) : null}
+
       <button
         type="submit"
-        className="btn rounded-full border-0 bg-cyan-600 px-7 text-white hover:bg-cyan-700"
+        className="btn rounded-full border-0 bg-slate-900 px-7 text-white hover:bg-slate-800"
         disabled={isSubmitting}
       >
         {isSubmitting ? 'Please wait...' : submitLabel}

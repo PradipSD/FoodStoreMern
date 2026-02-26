@@ -22,7 +22,12 @@ function App() {
         position="top-right"
         toastOptions={{
           duration: 2500,
-          style: { fontSize: '0.9rem' },
+          style: {
+            fontSize: '0.9rem',
+            borderRadius: '12px',
+            border: '1px solid rgba(15, 23, 42, 0.08)',
+            boxShadow: '0 10px 24px rgba(15, 23, 42, 0.12)',
+          },
         }}
       />
     </div>
