@@ -1,0 +1,42 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  font-family: "Trebuchet MS", "Segoe UI", Tahoma, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(90rem 60rem at 5% -10%, rgba(13, 148, 136, 0.12), transparent),
+    radial-gradient(90rem 60rem at 95% 0%, rgba(14, 165, 233, 0.12), transparent),
+    linear-gradient(180deg, #f8fbfc 0%, #eef4f7 100%);
+  color: #102a43;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.page-shell {
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(6px);
+  box-shadow:
+    0 12px 32px rgba(15, 23, 42, 0.08),
+    0 2px 6px rgba(15, 23, 42, 0.05);
+}
+
+.section-title {
+  letter-spacing: 0.01em;
+  color: #0f172a;
+}
+
+.subtle-text {
+  color: rgba(15, 23, 42, 0.7);
+}
